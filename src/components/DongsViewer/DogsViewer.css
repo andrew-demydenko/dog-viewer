@@ -1,3 +1,13 @@
+.dogs-viewer-container {
+  display: flex;
+  gap: 40px;
+  align-items: start;
+}
+
+.dogs-viewer-content {
+  min-width: 1px;
+}
+
 .thumbnails {
   display: flex;
   gap: 20px;
@@ -14,7 +24,6 @@
   border: 1px solid gray;
   padding: 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-
 }
 .main-image img {
   object-fit: contain;
@@ -59,4 +68,19 @@
 
 .thumbnail:hover {
   transform: scale(1.05);
+}
+
+.image-controls {
+  margin-top: 15px;
+  display: flex;
+  justify-content: center;
+}
+
+.favorite-button {
+  background-color: #4a90e2;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
 }
