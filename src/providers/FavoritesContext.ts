@@ -1,8 +1,9 @@
 import { createContext } from "react";
+import type { DogImage } from "@/api/dogImages";
 
 export interface FavoritesContextType {
-  favorites: string[];
-  addFavorite: (imageUrl: string) => void;
+  favorites: DogImage[];
+  addFavorite: (dogImage: DogImage) => void;
   isFavorite: (imageUrl: string) => boolean;
 }
 

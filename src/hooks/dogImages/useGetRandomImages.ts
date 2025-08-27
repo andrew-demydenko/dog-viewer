@@ -1,8 +1,8 @@
 import { useEffect, useState, useCallback } from "react";
-import { getRandomDogs } from "@/api/dogImages";
+import { getRandomDogs, type DogImage } from "@/api/dogImages";
 
 export const useGetRandomImages = (count: number) => {
-  const [images, setImages] = useState<string[]>();
+  const [images, setImages] = useState<DogImage[]>();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 

@@ -2,11 +2,12 @@ import { useEffect, useState } from "react";
 import { useGetRandomImages } from "@/hooks/dogImages/useGetRandomImages";
 import { useFavorites } from "@/hooks/favorites/useFavorites";
 import { FavoritesList } from "@/components/FavoritesList";
+import type { DogImage } from "@/api/dogImages";
 import "./DogsViewer.css";
 
 export const DogsViewer = () => {
   const { images, loading, error } = useGetRandomImages(10);
-  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [selectedImage, setSelectedImage] = useState<DogImage | null>(null);
   const { isFavorite, addFavorite } = useFavorites();
 
   useEffect(() => {
@@ -36,39 +37,42 @@ export const DogsViewer = () => {
         {selectedImage ? (
           <div className="main-image">
             <img
-              src={selectedImage}
+              src={selectedImage.image}
               alt="Selected Dog"
               className="selected-image"
             />
-            {isFavorite(selectedImage) ? null : (
-              <div className="image-controls">
+
+            <div className="image-controls">
+              <div>{selectedImage.breed}</div>
+              {isFavorite(selectedImage.image) ? null : (
                 <button
                   className="favorite-button"
                   onClick={handleToggleFavorite}
                 >
                   Add to Favorites
                 </button>
-              </div>
-            )}
+              )}
+            </div>
           </div>
         ) : null}
         <div className="thumbnails">
-          {images?.map((image, index) => (
+          {images?.map((dogImage, index) => (
             <div
               className={`thumbnail ${
-                image === selectedImage ? "selected" : ""
+                dogImage.image === selectedImage?.image ? "selected" : ""
               }`}
               key={index}
-              onClick={() => setSelectedImage(image)}
+              onClick={() => setSelectedImage(dogImage)}
             >
               <div className="thumbnail-content">
                 <img
                   key={index}
-                  src={image}
-                  alt={`Dog ${image}`}
+                  src={dogImage.image}
+                  alt={`Dog ${dogImage.image}`}
                   className="dog-image"
                 />
               </div>
+              <div className="dog-breed">{dogImage.breed}</div>
             </div>
           ))}
         </div>

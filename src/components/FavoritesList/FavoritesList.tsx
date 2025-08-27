@@ -1,9 +1,10 @@
 import { useFavorites } from "@/hooks/favorites/useFavorites";
+import type { DogImage } from "@/api/dogImages";
 import "./FavoritesList.css";
 
 interface FavoritesListProps {
-  onSelectImage: (imageUrl: string) => void;
-  selectedImage: string | null;
+  onSelectImage: (dogImage: DogImage) => void;
+  selectedImage: DogImage | null;
 }
 
 export const FavoritesList = ({
@@ -25,15 +26,15 @@ export const FavoritesList = ({
     <div className="favorites-container">
       <h3 className="favorites-title">Favorites</h3>
       <div className="favorites-list">
-        {favorites.map((imageUrl, index) => (
+        {favorites.map((dogImage, index) => (
           <div
             key={`favorite-${index}`}
-            onClick={() => onSelectImage(imageUrl)}
+            onClick={() => onSelectImage(dogImage)}
             className={`favorite-item ${
-              imageUrl === selectedImage ? "selected" : ""
+              dogImage.image === selectedImage?.image ? "selected" : ""
             }`}
           >
-            <img src={imageUrl} alt={`Favorite ${index + 1}`} />
+            <img src={dogImage.image} alt={`Favorite ${index + 1}`} />
             {/* toDo remove from favorites */}
           </div>
         ))}
