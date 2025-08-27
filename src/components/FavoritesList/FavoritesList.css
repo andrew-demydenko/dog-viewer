@@ -28,7 +28,7 @@
 }
 
 .favorite-item.selected {
-  box-shadow: 0 0 0 4px #646cff;
+  box-shadow: 0 0 0 4px var(--selected-color);
 }
 
 .favorite-item img {

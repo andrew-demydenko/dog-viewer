@@ -28,15 +28,13 @@ export const FavoritesList = ({
         {favorites.map((imageUrl, index) => (
           <div
             key={`favorite-${index}`}
+            onClick={() => onSelectImage(imageUrl)}
             className={`favorite-item ${
               imageUrl === selectedImage ? "selected" : ""
             }`}
           >
-            <img
-              src={imageUrl}
-              alt={`Favorite ${index + 1}`}
-              onClick={() => onSelectImage(imageUrl)}
-            />
+            <img src={imageUrl} alt={`Favorite ${index + 1}`} />
+            {/* toDo remove from favorites */}
           </div>
         ))}
       </div>

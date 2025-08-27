@@ -48,7 +48,7 @@
 }
 
 .thumbnail.selected {
-  background:#646cff;
+  background: var(--selected-color);
 }
 
 .thumbnail-content {
