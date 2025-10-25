@@ -1,14 +1,19 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { useGetRandomImages } from "@/hooks/dogImages/useGetRandomImages";
 import { useFavorites } from "@/hooks/favorites/useFavorites";
 import { FavoritesList } from "@/components/FavoritesList";
 import type { DogImage } from "@/api/dogImages";
+import { Search } from "@/components/Search";
 import "./DogsViewer.css";
 
 export const DogsViewer = () => {
   const { images, loading, error } = useGetRandomImages(10);
+  const [breed, setBreed] = useState<string>("");
   const [selectedImage, setSelectedImage] = useState<DogImage | null>(null);
   const { isFavorite, addFavorite } = useFavorites();
+  const filteredImages = useMemo(() => {
+    return breed ? images?.filter((img) => img.breed.includes(breed)) : images;
+  }, [breed, images]);
 
   useEffect(() => {
     if (!selectedImage && images && images.length > 0) {
@@ -33,7 +38,10 @@ export const DogsViewer = () => {
   return (
     <div className="dogs-viewer-container">
       <div className="dogs-viewer-content">
-        <div className="selected-image-container"></div>
+        <div>
+          <Search value={breed} onChange={setBreed} />
+        </div>
+
         {selectedImage ? (
           <div className="main-image">
             <img
@@ -56,23 +64,24 @@ export const DogsViewer = () => {
           </div>
         ) : null}
         <div className="thumbnails">
-          {images?.map((dogImage, index) => (
+          {filteredImages?.map((dogImage) => (
             <div
               className={`thumbnail ${
                 dogImage.image === selectedImage?.image ? "selected" : ""
               }`}
-              key={index}
+              key={dogImage.image}
               onClick={() => setSelectedImage(dogImage)}
             >
               <div className="thumbnail-content">
                 <img
-                  key={index}
                   src={dogImage.image}
                   alt={`Dog ${dogImage.image}`}
                   className="dog-image"
                 />
               </div>
-              <div className="dog-breed">{dogImage.breed}</div>
+              <div title={dogImage.breed} className="dog-breed">
+                {dogImage.breed}
+              </div>
             </div>
           ))}
         </div>

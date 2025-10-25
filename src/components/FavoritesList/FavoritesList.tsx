@@ -25,19 +25,21 @@ export const FavoritesList = ({
   return (
     <div className="favorites-container">
       <h3 className="favorites-title">Favorites</h3>
-      <div className="favorites-list">
-        {favorites.map((dogImage, index) => (
-          <div
-            key={`favorite-${index}`}
-            onClick={() => onSelectImage(dogImage)}
-            className={`favorite-item ${
-              dogImage.image === selectedImage?.image ? "selected" : ""
-            }`}
-          >
-            <img src={dogImage.image} alt={`Favorite ${index + 1}`} />
-            {/* toDo remove from favorites */}
-          </div>
-        ))}
+      <div className="favorites-list-scroller">
+        <div className="favorites-list">
+          {favorites.map((dogImage, index) => (
+            <div
+              key={`favorite-${index}`}
+              onClick={() => onSelectImage(dogImage)}
+              className={`favorite-item ${
+                dogImage.image === selectedImage?.image ? "selected" : ""
+              }`}
+            >
+              <img src={dogImage.image} alt={`Favorite ${index + 1}`} />
+              {/* toDo remove from favorites */}
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
