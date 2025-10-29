@@ -25,6 +25,12 @@ export const FavoritesProvider = ({ children }: FavoritesProviderProps) => {
     }
   };
 
+  const removeFavorite = (imageUrl: string) => {
+    const newFavorites = favorites.filter((fav) => fav.image !== imageUrl);
+    setFavorites(newFavorites);
+    localStorage.setItem("dogFavorites", JSON.stringify(newFavorites));
+  };
+
   const isFavorite = (imageUrl: string): boolean => {
     return favorites.find((fav) => fav.image === imageUrl) !== undefined;
   };
@@ -34,6 +40,7 @@ export const FavoritesProvider = ({ children }: FavoritesProviderProps) => {
       value={{
         favorites,
         addFavorite,
+        removeFavorite,
         isFavorite,
       }}
     >

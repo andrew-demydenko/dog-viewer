@@ -11,7 +11,7 @@ export const FavoritesList = ({
   onSelectImage,
   selectedImage,
 }: FavoritesListProps) => {
-  const { favorites } = useFavorites();
+  const { favorites, removeFavorite } = useFavorites();
 
   if (favorites.length === 0) {
     return (
@@ -30,13 +30,25 @@ export const FavoritesList = ({
           {favorites.map((dogImage, index) => (
             <div
               key={`favorite-${index}`}
-              onClick={() => onSelectImage(dogImage)}
               className={`favorite-item ${
                 dogImage.image === selectedImage?.image ? "selected" : ""
               }`}
             >
-              <img src={dogImage.image} alt={`Favorite ${index + 1}`} />
-              {/* toDo remove from favorites */}
+              <img
+                src={dogImage.image}
+                alt={`Favorite ${index + 1}`}
+                onClick={() => onSelectImage(dogImage)}
+              />
+              <button
+                className="remove-favorite-btn"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  removeFavorite(dogImage.image);
+                }}
+                aria-label="Remove from favorites"
+              >
+                <span className="remove-icon">×</span>
+              </button>
             </div>
           ))}
         </div>

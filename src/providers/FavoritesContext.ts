@@ -4,6 +4,7 @@ import type { DogImage } from "@/api/dogImages";
 export interface FavoritesContextType {
   favorites: DogImage[];
   addFavorite: (dogImage: DogImage) => void;
+  removeFavorite: (imageUrl: string) => void;
   isFavorite: (imageUrl: string) => boolean;
 }
 
