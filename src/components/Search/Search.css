@@ -6,9 +6,9 @@
 
 .search-input {
   border-radius: 12px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  box-shadow: var(--main-shadow);
   width: 100%;
-  border: 1px solid #000;
+  border: 1px solid gray;
   flex: 1;
   padding: 20px 12px;
   font-size: 18px;
